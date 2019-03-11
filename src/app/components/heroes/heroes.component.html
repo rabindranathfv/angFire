@@ -1,0 +1,58 @@
+<h1>Heroes</h1>
+<hr>
+
+<div class="row">
+    <div class="col-md-12 text-right">
+        <!-- Al estar dentro de un router-outlet hay que añadir un "/" para que salga fuera y acceda
+          correctamente a la ruta que queremos ir
+    -->
+        <button [routerLink]="['/heroe']" type="button" class="btn btn-outline-primary" type="button" name="button">
+        New Hero
+      </button>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-md-12">
+        <div class="responsive-table">
+            <div class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Casa</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </div>
+
+        </div>
+    </div>
+</div>
