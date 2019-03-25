@@ -23,7 +23,7 @@ import { HeroesService } from './services/heroes.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
     HttpModule,
     FormsModule,
     ReactiveFormsModule,

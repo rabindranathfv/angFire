@@ -43,21 +43,21 @@ export class HeroeComponent implements OnInit {
   save() {
     console.log('Save action');
     console.log(this.heroe);
-    if ( this.id === 'new') {
+    /* if ( this.id === 'new') { */
       console.log('new');
       this._heroesService.newHero(this.heroe)
-        .subscribe( data => {
-          this.router.navigate(['/heroe', data.name]);
-        },
-        error => console.error(error));
-    } else {
-      console.log(`Update ${ this.id }`);
-      this._heroesService.updateHero(this.heroe, this.id)
+          .subscribe( data => {
+            this.router.navigate(['/heroe', data.name]);
+          },
+          error => console.error(error));
+    /* } else { */
+      // console.log(`Update ${ this.id }`);
+      /* this._heroesService.updateHero(this.heroe, this.id)
         .subscribe( data => {
           console.log(data);
         },
-        error => console.error(error));
-    }
+        error => console.error(error)); */
+    /* } */
   }
 
   addNew( form: NgForm) {

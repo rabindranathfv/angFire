@@ -22,37 +22,20 @@
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Casa</th>
-                        <th scope="col">Opciones</th>
+                        <th scope="col">Bio</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
+                <tbody *ngFor="let heroe of heroes; let index = i">
+                    <tr id="index">
+                        <th scope="row"> {{ heroe.id }}</th>
+                        <td> {{ heroe.nombre }}</td>
+                        <td> {{ heroe.casa }}</td>
+                        <td> {{ heroe.bio }}</td>
                     </tr>
                 </tbody>
             </div>
 
+            {{ heroes | async }}
         </div>
     </div>
 </div>
