@@ -1,40 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import { Observable, Subscriber } from 'rxjs';
-import { tap, map, filter } from 'rxjs/operators';
-
-// services
-import { HeroesService } from 'src/app/services/heroes.service';
-
-// interface
-import { Heroe } from 'src/app/interfaces/heroe.interface';
+import { HeroesService } from './../../services/heroes.service';
+import { Heroe } from './../../interfaces/heroe.interface';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../../widgets/modal/modal.component';
 
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.scss']
+  styles: [
+    ` .table-responsive {
+        margin-top: 15px;
+      }
+    `
+  ]
 })
 export class HeroesComponent implements OnInit {
-
-
-  heroes: any;
-
-  constructor( private http: Http,
-              private _heroesService: HeroesService ) { }
+  heroes: Heroe;
+  loading = true;
+  constructor(private _heroesService: HeroesService,
+              private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.getHeroes();
+    this._heroesService.getHeroes().subscribe((data: Heroe) => {
+      this.heroes = data;
+      console.log(this.heroes);
+      this.loading = false;
+     });
   }
 
-  /**
-   * getHeroes
-   */
-  public getHeroes() {
-    this._heroesService.getHeroes()
-        .subscribe((resp) => {
-          console.log(resp);
-          console.log(resp['_body']);
-        });
+  delete(key$: string) {
+    const selectHeroQuestion = `¿Estás segur@ de querer borrar el heroe ${ this.heroes[key$].name }?`;
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.title = 'Eliminar heroe';
+    modalRef.componentInstance.body = selectHeroQuestion;
+    modalRef.componentInstance.key$ = key$;
+    modalRef.componentInstance.heroes = this.heroes;
   }
-
 }

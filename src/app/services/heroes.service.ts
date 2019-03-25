@@ -1,41 +1,61 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import { Observable, Subscriber } from 'rxjs';
-import { tap, map, filter } from 'rxjs/operators';
+// https://angular.io/guide/http#adding-headers IMPORTANTE!!!
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Heroe } from './../interfaces/heroe.interface';
+import {map} from 'rxjs/operators';
 
-// interface
-import { Heroe } from '../interfaces/heroe.interface';
-
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class HeroesService {
+  // https://heroes-app-83fc9.firebaseio.com/heroes.json
+  // https://heroes-app-83fc9.firebaseio.com/heroes/1.json
+  // https://heroes-app-83fc9.firebaseio.com/heroes/1/name.json
+  heroesUrl = 'https://heroes-1d546.firebaseio.com/heroes.json';
+  heroeUrl = 'https://heroes-1d546.firebaseio.com/heroes/';
+  constructor( private http: HttpClient) { }
 
-  heroesURL: string = 'https://heroes-1d546.firebaseio.com/heroes.json';
-
-  constructor( private http: Http) { }
-
-  public newHero( heroe: Heroe) {
-      console.log('enter service');
-      let body = JSON.stringify( heroe );
-      let headers = new Headers({
-        'content-type': 'application/json'
-      });
-
-      return this.http.post( this.heroesURL, body, { headers } )
-                 .pipe( map( (resp) => {
-                  console.log(resp.json());
-                  return resp.json();
-                })
-              );
-                  
+  newHero( heroe: Heroe) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    // https://angular.io/guide/http#making-a-post-request
+    return this.http.post<Heroe>( this.heroesUrl, heroe , httpOptions )
+          .pipe(
+          map( res => {
+            console.log(res.name);
+            return res;
+          }));
   }
 
-  /**
-   * getHeroes
-   */
-  public getHeroes() {
-    return this.http.get(this.heroesURL);
-  }
+   updateHero( heroe: Heroe, key$: string) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json'
+        })
+      };
+      // https://angular.io/guide/http#making-a-post-request
+      return this.http.put<Heroe>( `${ this.heroeUrl }${ key$ }.json`, heroe , httpOptions )
+            .pipe(
+            map( res => {
+              console.log(res.name);
+              return res;
+            }));
+    }
+
+    getHeroe ( key$: string ) {
+      console.log(`${ this.heroeUrl }${ key$ }.json`);
+      return this.http.get<Heroe>( `${ this.heroeUrl }${ key$ }.json` );
+    }
+
+    getHeroes () {
+      return this.http.get<Heroe>( this.heroesUrl );
+    }
+
+    deleteHero ( key$: string) {
+      const url = `${ this.heroeUrl }/${ key$ }.json`;
+      console.log(url);
+      return this.http.delete<Heroe>( url);
+    }
 }
+

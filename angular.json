@@ -3,21 +3,17 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angFire": {
+    "heroesapp": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
-      "schematics": {
-        "@schematics/angular:component": {
-          "styleext": "scss"
-        }
-      },
+      "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angFire",
+            "outputPath": "dist/heroesapp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -27,9 +23,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css",
+              "src/assets/b4/css/bootstrap.min.css",
+              "src/assets/font-awesome/css/font-awesome.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/jquery/jquery.slim.min.js",
+              "src/assets/tether/tether.min.js",
+              "src/assets/b4/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -47,32 +49,25 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
+              "buildOptimizer": true
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angFire:build"
+            "browserTarget": "heroesapp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angFire:build:production"
+              "browserTarget": "heroesapp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angFire:build"
+            "browserTarget": "heroesapp:build"
           }
         },
         "test": {
@@ -83,7 +78,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.scss"
+              "src/styles.css"
             ],
             "scripts": [],
             "assets": [
@@ -106,21 +101,15 @@
         }
       }
     },
-    "angFire-e2e": {
+    "heroesapp-e2e": {
       "root": "e2e/",
       "projectType": "application",
-      "prefix": "",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angFire:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "angFire:serve:production"
-            }
+            "devServerTarget": "heroesapp:serve"
           }
         },
         "lint": {
@@ -135,5 +124,5 @@
       }
     }
   },
-  "defaultProject": "angFire"
+  "defaultProject": "heroesapp"
 }

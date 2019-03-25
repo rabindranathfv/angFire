@@ -3,32 +3,37 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { AppRoutingModule } from './app-routing.module';
+import { APP_ROUTING } from './app.routes';
+
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule } from '@angular/forms';
-
 import { HeroesComponent } from './components/heroes/heroes.component';
-import { HeroeComponent } from './components/heroe/heroe.component';
+import { HeroeComponent } from './components/heroes/heroe.component';
+import { LoadingComponent } from './widgets/loading/loading.component';
 
-// services
 import { HeroesService } from './services/heroes.service';
+import { KeysPipe } from './pipes/keys.pipe';
+import { ModalComponent } from './widgets/modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroesComponent,
-    HeroeComponent
+    HeroeComponent,
+    KeysPipe,
+    LoadingComponent,
+    ModalComponent,
   ],
   imports: [
+    APP_ROUTING,
     BrowserModule,
-    AppRoutingModule,
     HttpModule,
     FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
+    NgbModule.forRoot(),
   ],
+  entryComponents: [ModalComponent],
   providers: [HeroesService],
   bootstrap: [AppComponent]
 })
