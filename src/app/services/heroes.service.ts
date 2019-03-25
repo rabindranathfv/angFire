@@ -10,7 +10,7 @@ export class HeroesService {
   heroeUrl = 'https://heroes-1d546.firebaseio.com/heroes/';
   constructor( private http: HttpClient) { }
 
-  newHero( heroe: Heroe) {
+  public newHero( heroe: Heroe) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
@@ -25,7 +25,7 @@ export class HeroesService {
           }));
   }
 
-   updateHero( heroe: Heroe, key$: string) {
+  public updateHero( heroe: Heroe, key$: string) {
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type':  'application/json'
@@ -40,16 +40,16 @@ export class HeroesService {
             }));
     }
 
-    getHeroe ( key$: string ) {
+    public getHeroe ( key$: string ) {
       console.log(`${ this.heroeUrl }${ key$ }.json`);
       return this.http.get<Heroe>( `${ this.heroeUrl }${ key$ }.json` );
     }
 
-    getHeroes () {
+    public  getHeroes () {
       return this.http.get<Heroe>( this.heroesUrl );
     }
 
-    deleteHero ( key$: string) {
+    public deleteHero ( key$: string) {
       const url = `${ this.heroeUrl }/${ key$ }.json`;
       console.log(url);
       return this.http.delete<Heroe>( url);
