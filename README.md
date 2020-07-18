@@ -1,4 +1,4 @@
-# Heroesapp
+# Angular FireChat
 
 This project was created for using firebase, angular and create a chatApp
 
